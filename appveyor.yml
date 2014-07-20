@@ -4,3 +4,7 @@ deploy:
   api_key:
     secure: Tly8BaBiF51tL82pKuqB0wczW5t+UgQltWtdjbfQFi7R6/eYH7+vg/4z5qjJomH6
   artifact: /.*\.nupkg/
+
+artifacts:
+  - path: '*.nupkg'
+    name: Mixpanel.Data NuGet package
