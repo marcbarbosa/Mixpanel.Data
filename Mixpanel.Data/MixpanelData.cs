@@ -1,4 +1,5 @@
-﻿using Mixpanel.Data.Interfaces;
+﻿using System.Collections.Generic;
+using Mixpanel.Data.Interfaces;
 using Mixpanel.Data.ResponseModels;
 using System;
 using System.Configuration.Abstractions;
@@ -38,7 +39,7 @@ namespace Mixpanel.Data
                 () => { throw new ArgumentNullException(); });
         }
 
-        public Task<ExportResponse> Export(DateTime from, DateTime to, System.Collections.Generic.ICollection<string> events = null, string where = "", string bucket = "")
+        public Task<ExportResponse> Export(DateTime from, DateTime to, ICollection<string> events = null, string where = "", string bucket = "")
         {
             throw new NotImplementedException();
         }
