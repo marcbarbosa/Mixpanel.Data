@@ -60,6 +60,7 @@
     <Compile Include="ResponseModels\ExportResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Mixpanel.Data.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
