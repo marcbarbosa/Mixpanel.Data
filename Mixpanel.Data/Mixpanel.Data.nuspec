@@ -16,6 +16,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Mixpanel.Data\bin\Release\Mixpanel.Data.dll" target="lib"></file>
+    <file src="bin\Release\Mixpanel.Data.dll" target="lib"></file>
   </files>
 </package>
