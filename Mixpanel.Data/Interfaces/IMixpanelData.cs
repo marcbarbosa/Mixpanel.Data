@@ -9,6 +9,6 @@ namespace Mixpanel.Data.Interfaces
     {
         Task<ExportResponse> Export(DateTime from, DateTime to, ICollection<string> events = null, string where = "", string bucket = "");
 
-        Task<EngageResponse> Engage(string where, string sessionId, int page);
+        Task<EngageResponse> Engage(string where = "", string sessionId = "", int page = 0);
     }
 }

@@ -50,7 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Interfaces\IMixpanelData.cs" />
+    <Compile Include="MethodEnum.cs" />
+    <Compile Include="Models\Endpoint.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\People.cs" />
     <Compile Include="ResponseModels\EngageResponse.cs" />
@@ -60,7 +64,6 @@
     <Compile Include="ResponseModels\ExportResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mixpanel.Data.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

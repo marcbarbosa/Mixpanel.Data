@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using Mixpanel.Data.Interfaces;
 using Mixpanel.Data.ResponseModels;
 using System;
@@ -41,10 +42,12 @@ namespace Mixpanel.Data
 
         public Task<ExportResponse> Export(DateTime from, DateTime to, ICollection<string> events = null, string where = "", string bucket = "")
         {
+            var parameters = new NameValueCollection();
+
             throw new NotImplementedException();
         }
 
-        public Task<EngageResponse> Engage(string where, string sessionId, int page)
+        public Task<EngageResponse> Engage(string where = "", string sessionId = "", int page = 0)
         {
             throw new NotImplementedException();
         }
