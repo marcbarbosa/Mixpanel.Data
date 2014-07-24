@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using Mixpanel.Data.Extensions;
 using Mixpanel.Data.Interfaces;
+using Mixpanel.Data.Models;
 using Mixpanel.Data.ResponseModels;
 using System;
 using System.Configuration.Abstractions;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Mixpanel.Data
 {
@@ -12,18 +18,21 @@ namespace Mixpanel.Data
     {
         private readonly IConfigurationManager configurationManager;
 
+        private readonly IHttpClient httpClient;
+
         public string ApiKey { get; private set; }
         public string ApiSecret { get; private set; }
         public string Token { get; private set; }
 
         public MixpanelData()
-            : this(ConfigurationManager.Instance)
+            : this(ConfigurationManager.Instance, new HttpClientWrapper())
         {
         }
 
-        public MixpanelData(IConfigurationManager configurationManager)
+        public MixpanelData(IConfigurationManager configurationManager, IHttpClient httpClient)
         {
             this.configurationManager = configurationManager;
+            this.httpClient = httpClient;
 
             LoadSettings();
         }
@@ -40,14 +49,33 @@ namespace Mixpanel.Data
                 () => { throw new ArgumentNullException(); });
         }
 
-        public Task<ExportResponse> Export(DateTime from, DateTime to, ICollection<string> events = null, string where = "", string bucket = "")
+        public async Task<ExportResponse> Export(DateTime from, DateTime to, ICollection<string> events = null, string where = "", string bucket = "")
         {
             var parameters = new NameValueCollection();
+            parameters.AddIfNotIsNullOrWhiteSpace("from_date", from.ToString("yyyy-MM-dd"));
+            parameters.AddIfNotIsNullOrWhiteSpace("to_date", to.ToString("yyyy-MM-dd"));
 
-            throw new NotImplementedException();
+            var endpoint = new Endpoint().Create(this.ApiKey, this.ApiSecret)
+                                         .ForMethod(MethodEnum.Export)
+                                         .WithParamaters(parameters)
+                                         .Build();
+
+            var response = await httpClient.GetAsync(endpoint);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var eventDump = await response.Content.ReadAsStringAsync();
+
+                var exportResponse = from evt in eventDump.Split('\n')
+                                     select JsonConvert.DeserializeObject<Event>(evt);
+
+                return (ExportResponse)exportResponse;
+            }
+
+            return null;
         }
 
-        public Task<EngageResponse> Engage(string where = "", string sessionId = "", int page = 0)
+        public async Task<EngageResponse> Engage(string where = "", string sessionId = "", int page = 0)
         {
             throw new NotImplementedException();
         }

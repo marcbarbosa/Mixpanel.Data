@@ -13,6 +13,7 @@
       <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.0" />
       <dependency id="Newtonsoft.Json" version="4.5.11" />
       <dependency id="System.Configuration.Abstractions" version="2.0.2.15" />
+      <dependency id="Simplify.Cryptography" version="1.0.0" />
     </dependencies>
   </metadata>
   <files>

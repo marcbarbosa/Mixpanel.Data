@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using System.Net;
+using Mixpanel.Data.Interfaces;
+using Moq;
 using System;
 using System.Collections.Specialized;
 using System.Configuration.Abstractions;
@@ -12,6 +14,8 @@ namespace Mixpanel.Data.Facts
         {
             private readonly Mock<IConfigurationManager> mockConfigurationManager = new Mock<IConfigurationManager>();
 
+            private readonly Mock<IHttpClient> mockHttpClient = new Mock<IHttpClient>();
+
             [Fact]
             public void ReturnsArgmentNullExceptionGivenEmptyConfig()
             {
@@ -20,7 +24,7 @@ namespace Mixpanel.Data.Facts
 
                 // act
                 // assert
-                Assert.Throws<ArgumentNullException>(() => new MixpanelData(mockConfigurationManager.Object));
+                Assert.Throws<ArgumentNullException>(() => new MixpanelData(mockConfigurationManager.Object, mockHttpClient.Object));
             }
 
             [Fact]
@@ -37,7 +41,7 @@ namespace Mixpanel.Data.Facts
 
                 // act
                 // assert
-                Assert.DoesNotThrow(() => new MixpanelData(mockConfigurationManager.Object));
+                Assert.DoesNotThrow(() => new MixpanelData(mockConfigurationManager.Object, mockHttpClient.Object));
             }
 
             [Fact]
@@ -58,7 +62,7 @@ namespace Mixpanel.Data.Facts
                 mockConfigurationManager.Setup(c => c.AppSettings).Returns(appSettings);
 
                 // act
-                var sut = new MixpanelData(mockConfigurationManager.Object);
+                var sut = new MixpanelData(mockConfigurationManager.Object, mockHttpClient.Object);
                 
                 // assert
                 Assert.Equal(expectedApiKey, sut.ApiKey);

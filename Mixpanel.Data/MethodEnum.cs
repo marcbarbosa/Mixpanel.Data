@@ -12,7 +12,7 @@ namespace Mixpanel.Data
         [Description("engage")]
         Engage,
 
-        [Description("track")]
-        Track
+        [Description("export")]
+        Export
     }
 }

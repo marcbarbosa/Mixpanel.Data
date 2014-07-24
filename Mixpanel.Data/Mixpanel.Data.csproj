@@ -35,6 +35,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Simplify.Cryptography">
+      <HintPath>..\packages\Simplify.Cryptography.1.0.0\lib\net40\Simplify.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Abstractions">
@@ -52,6 +55,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\EnumExtension.cs" />
+    <Compile Include="Extensions\CollectionExtension.cs" />
+    <Compile Include="Interfaces\IHttpClient.cs" />
     <Compile Include="Interfaces\IMixpanelData.cs" />
     <Compile Include="MethodEnum.cs" />
     <Compile Include="Models\Endpoint.cs" />
@@ -64,6 +69,7 @@
     <Compile Include="ResponseModels\ExportResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Mixpanel.Data.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
