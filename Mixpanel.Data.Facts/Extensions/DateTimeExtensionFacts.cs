@@ -56,14 +56,6 @@ namespace Mixpanel.Data.Facts.Extensions
                 // assert
                 Assert.Equal(1406134740, actual);
             }
-
-            [Fact]
-            public async Task Test()
-            {
-                var mixpanel = new MixpanelData();
-
-                mixpanel.Export(new DateTime(2014, 7, 23), new DateTime(2014, 7, 23)).Wait();
-            }
         }
     }
 }
