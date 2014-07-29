@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -66,10 +67,14 @@ namespace Mixpanel.Data
             {
                 var eventDump = await response.Content.ReadAsStringAsync();
 
-                var exportResponse = from evt in eventDump.Split('\n')
-                                     select JsonConvert.DeserializeObject<Event>(evt);
+                var eventList = (from evt in eventDump.Split('\n')
+                                 select JsonConvert.DeserializeObject<Event>(evt)).ToList();
 
-                return (ExportResponse)exportResponse;
+                var exportResponse = new ExportResponse();
+
+                eventList.ForEach(exportResponse.Add);
+
+                return exportResponse;
             }
 
             return null;
