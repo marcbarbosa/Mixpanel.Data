@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Mixpanel.Data.Interfaces;
+﻿using Mixpanel.Data.Interfaces;
 using Moq;
 using System;
 using System.Collections.Specialized;

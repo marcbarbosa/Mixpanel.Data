@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using Mixpanel.Data.Extensions;
+﻿using Mixpanel.Data.Extensions;
 using Mixpanel.Data.Interfaces;
 using Mixpanel.Data.Models;
 using Mixpanel.Data.ResponseModels;
-using System;
-using System.Configuration.Abstractions;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration.Abstractions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mixpanel.Data
 {
