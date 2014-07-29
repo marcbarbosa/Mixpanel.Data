@@ -1,7 +1,7 @@
 artifacts:
   - path: out\*.nupkg
 
-platform: AnyCPU
+platform: Any CPU
 
 configuration: Release
 
