@@ -1,4 +1,5 @@
-﻿using Mixpanel.Data.Extensions;
+﻿using System.IO;
+using Mixpanel.Data.Extensions;
 using Mixpanel.Data.Interfaces;
 using Mixpanel.Data.Models;
 using Mixpanel.Data.ResponseModels;
@@ -60,11 +61,19 @@ namespace Mixpanel.Data
 
             if (response.IsSuccessStatusCode)
             {
-                var eventDump = await response.Content.ReadAsStringAsync();
+                var stream = response.Content.ReadAsStreamAsync().Result;
 
-                var eventList = (from evt in eventDump.Split('\n')
-                                 select JsonConvert.DeserializeObject<Event>(evt)).ToList();
+                var reader = new StreamReader(stream);
 
+                var eventList = new List<Event>();
+
+                while (reader.Peek() > -1)
+                {
+                    var line = reader.ReadLine();
+
+                    eventList.Add(JsonConvert.DeserializeObject<Event>(line));
+                }
+                
                 var exportResponse = new ExportResponse();
 
                 eventList.ForEach(exportResponse.Add);
