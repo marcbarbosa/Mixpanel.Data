@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Simplify.Cryptography">
       <HintPath>..\packages\Simplify.Cryptography.1.0.0\lib\net40\Simplify.Cryptography.dll</HintPath>
     </Reference>
