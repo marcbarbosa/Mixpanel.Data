@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration.Abstractions;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Mixpanel.Data
@@ -32,19 +33,16 @@ namespace Mixpanel.Data
             this.configurationManager = configurationManager;
             this.httpClient = httpClient;
 
-            LoadSettings();
+            this.LoadSettings();
         }
 
         private void LoadSettings()
         {
-            ApiKey = configurationManager.AppSettings.AppSetting<string>(Constants.SettingKeys.ApiKey,
-                () => { throw new ArgumentNullException(); });
+            ApiKey = this.configurationManager.AppSettings.AppSetting<string>(Constants.SettingKeys.ApiKey, () => { throw new ArgumentNullException(); });
 
-            ApiSecret = configurationManager.AppSettings.AppSetting<string>(Constants.SettingKeys.ApiSecret,
-                () => { throw new ArgumentNullException(); });
+            ApiSecret = this.configurationManager.AppSettings.AppSetting<string>(Constants.SettingKeys.ApiSecret, () => { throw new ArgumentNullException(); });
 
-            Token = configurationManager.AppSettings.AppSetting<string>(Constants.SettingKeys.Token,
-                () => { throw new ArgumentNullException(); });
+            Token = this.configurationManager.AppSettings.AppSetting<string>(Constants.SettingKeys.Token, () => { throw new ArgumentNullException(); });
         }
 
         public async Task<ExportResponse> Export(DateTime from, DateTime to, ICollection<string> events = null, string where = "", string bucket = "")
@@ -55,10 +53,10 @@ namespace Mixpanel.Data
 
             var endpoint = new Endpoint().Create(this.ApiKey, this.ApiSecret)
                                          .ForMethod(MethodEnum.Export)
-                                         .WithParamaters(parameters)
+                                         .WithParameters(parameters)
                                          .Build();
 
-            var response = await httpClient.GetAsync(endpoint);
+            var response = await this.httpClient.GetAsync(endpoint);
 
             if (response.IsSuccessStatusCode)
             {
@@ -79,7 +77,24 @@ namespace Mixpanel.Data
 
         public async Task<EngageResponse> Engage(string where = "", string sessionId = "", int page = 0)
         {
-            throw new NotImplementedException();
+            var parameters = new NameValueCollection();
+            parameters.AddIfNotIsNullOrWhiteSpace("where", where);
+            parameters.AddIfNotIsNullOrWhiteSpace("session_id", sessionId);
+            parameters.AddIfNotIsNullOrWhiteSpace("page", page.ToString());
+
+            var endpoint = new Endpoint().Create(this.ApiKey, this.ApiSecret)
+                                         .ForMethod(MethodEnum.Engage)
+                                         .WithParameters(parameters)
+                                         .Build();
+
+            var response = await this.httpClient.GetAsync(endpoint);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<EngageResponse>();
+            }
+
+            return null;
         }
     }
 }

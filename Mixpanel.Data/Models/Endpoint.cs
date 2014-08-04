@@ -42,7 +42,7 @@ namespace Mixpanel.Data.Models
             return this;
         }
 
-        public Endpoint WithParamaters(NameValueCollection parameters)
+        public Endpoint WithParameters(NameValueCollection parameters)
         {
             parameters.Add("api_key", this.ApiKey);
             parameters.Add("expire", this.Expire);
