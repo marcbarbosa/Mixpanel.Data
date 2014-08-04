@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Simplify.Cryptography">
       <HintPath>..\packages\Simplify.Cryptography.1.0.0\lib\net40\Simplify.Cryptography.dll</HintPath>
     </Reference>
@@ -66,6 +70,7 @@
     <Compile Include="ResponseModels\ExportResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Mixpanel.Data.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
