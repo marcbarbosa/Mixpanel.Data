@@ -57,6 +57,7 @@ namespace Mixpanel.Data
                                          .WithParameters(parameters)
                                          .Build();
 
+            this.httpClient.TimeOut = new TimeSpan(0, 1, 0, 0);
             var response = await this.httpClient.GetAsync(endpoint);
 
             if (response.IsSuccessStatusCode)
@@ -73,7 +74,7 @@ namespace Mixpanel.Data
 
                     eventList.Add(JsonConvert.DeserializeObject<Event>(line));
                 }
-                
+
                 var exportResponse = new ExportResponse();
 
                 eventList.ForEach(exportResponse.Add);

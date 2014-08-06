@@ -24,7 +24,7 @@ namespace Mixpanel.Data.Models
         {
             this.ApiKey = apiKey;
             this.ApiSecret = apiSecret;
-            this.Expire = DateTime.UtcNow.AddSeconds(60).ToUnixTimestamp().ToString();
+            this.Expire = DateTime.UtcNow.AddHours(1).ToUnixTimestamp().ToString();
 
             return this;
         }
