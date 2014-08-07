@@ -9,6 +9,6 @@ namespace Mixpanel.Data.Models
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "properties")]
-        public Dictionary<string, string> Properties { get; set; }
+        public Dictionary<string, object> Properties { get; set; }
     }
 }

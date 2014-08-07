@@ -1,12 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using Mixpanel.Data.Models;
-using Newtonsoft.Json;
+﻿using Mixpanel.Data.Models;
 using System.Collections.Generic;
 
 namespace Mixpanel.Data.ResponseModels
 {
-    public class ExportResponse : Collection<Event>
+    public class ExportResponse : List<Event>
     {
-        
     }
 }

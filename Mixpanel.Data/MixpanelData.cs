@@ -66,18 +66,12 @@ namespace Mixpanel.Data
 
                 var reader = new StreamReader(stream);
 
-                var eventList = new List<Event>();
+                var exportResponse = new ExportResponse();
 
                 while (reader.Peek() > -1)
                 {
-                    var line = reader.ReadLine();
-
-                    eventList.Add(JsonConvert.DeserializeObject<Event>(line));
+                    exportResponse.Add(JsonConvert.DeserializeObject<Event>(reader.ReadLine()));
                 }
-
-                var exportResponse = new ExportResponse();
-
-                eventList.ForEach(exportResponse.Add);
 
                 return exportResponse;
             }

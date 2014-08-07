@@ -62,17 +62,12 @@ namespace Mixpanel.Data.Facts
 
                 // act
                 var sut = new MixpanelData(mockConfigurationManager.Object, mockHttpClient.Object);
-                
+
                 // assert
                 Assert.Equal(expectedApiKey, sut.ApiKey);
                 Assert.Equal(expectedApiSecret, sut.ApiSecret);
                 Assert.Equal(expectedToken, sut.Token);
             }
-        }
-
-        public class People
-        {
-            
         }
     }
 }
