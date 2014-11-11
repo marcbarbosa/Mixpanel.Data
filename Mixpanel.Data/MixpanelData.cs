@@ -61,7 +61,7 @@ namespace Mixpanel.Data
 
             this.httpClient.TimeOut = TimeSpan.FromHours(1);
 
-            var response = await this.httpClient.GetAsync(endpoint);
+            var response = await this.httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead);
 
             if (response.IsSuccessStatusCode)
             {

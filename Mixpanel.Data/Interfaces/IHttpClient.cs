@@ -11,6 +11,8 @@ namespace Mixpanel.Data.Interfaces
 
         Task<HttpResponseMessage> GetAsync(string requestUri);
 
+        Task<HttpResponseMessage> GetAsync(string requestUri, HttpCompletionOption httpCompletionOption);
+
         Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent content);
     }
 
@@ -26,6 +28,11 @@ namespace Mixpanel.Data.Interfaces
         public async Task<HttpResponseMessage> GetAsync(string requestUri)
         {
             return await httpClient.GetAsync(requestUri);
+        }
+
+        public async Task<HttpResponseMessage> GetAsync(string requestUri, HttpCompletionOption httpCompletionOption)
+        {
+            return await httpClient.GetAsync(requestUri, httpCompletionOption);
         }
 
         public async Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent content)
