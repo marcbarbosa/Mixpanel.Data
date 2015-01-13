@@ -108,5 +108,27 @@ namespace Mixpanel.Data
 
             return null;
         }
+
+        public async Task<SegmentationResponse> Segmentation(string eventName, DateTime from, DateTime to)
+        {
+            var parameters = new NameValueCollection();
+            parameters.AddIfNotIsNullOrWhiteSpace("event", eventName);
+            parameters.AddIfNotIsNullOrWhiteSpace("from_date", from.ToString("yyyy-MM-dd"));
+            parameters.AddIfNotIsNullOrWhiteSpace("to_date", to.ToString("yyyy-MM-dd"));
+
+            var endpoint = new Endpoint().Create(this.ApiKey, this.ApiSecret)
+                                         .ForMethod(MethodEnum.Segmentation)
+                                         .WithParameters(parameters)
+                                         .Build();
+
+            var response = await this.httpClient.GetAsync(endpoint);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<SegmentationResponse>();
+            }
+
+            return null;
+        }
     }
 }

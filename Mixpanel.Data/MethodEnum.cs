@@ -13,6 +13,9 @@ namespace Mixpanel.Data
         Engage,
 
         [Description("export")]
-        Export
+        Export,
+
+        [Description("segmentation")]
+        Segmentation
     }
 }

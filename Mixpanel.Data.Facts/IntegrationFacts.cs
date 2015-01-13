@@ -16,5 +16,15 @@ namespace Mixpanel.Data.Facts
 
             Assert.NotNull(response);
         }
+
+        [Fact]
+        public void IntegrationTest2()
+        {
+            var mixpanel = new MixpanelData();
+
+            var response = mixpanel.Segmentation("View-Home", DateTime.Today.AddDays(-7), DateTime.Today.AddDays(-1)).Result;
+
+            Assert.NotNull(response);
+        }
     }
 }
